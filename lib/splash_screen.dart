@@ -16,10 +16,12 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> init() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const CagetegeroyPage()),
-    );
+    Future.delayed(Duration(seconds: 12), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CagetegeroyPage()),
+      );
+    });
   }
 
   @override
@@ -30,8 +32,22 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(child: FlutterLogo(size: 160.0)),
-    );
+        backgroundColor: Colors.white,
+        body: Center(
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.brown.shade200,
+                    Colors.brown.shade900,
+                  ],
+                )),
+                child: Image.asset("images/coffee_logo.png"))));
   }
 }
+
+// Center(child: FlutterLogo(size: 160.0)),

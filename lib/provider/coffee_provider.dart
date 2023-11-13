@@ -24,7 +24,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 20,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2)
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -40,7 +40,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 120,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "L", coffeeChecked: false, coffeeMulti: 3)
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -56,7 +56,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 50,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2)
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -72,7 +72,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 200,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2)
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -89,9 +89,9 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
           CoffeeSizeModel(
-              coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1),
+              coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2),
           CoffeeSizeModel(
-              coffeeSize: "L", coffeeChecked: false, coffeeMulti: 1),
+              coffeeSize: "L", coffeeChecked: false, coffeeMulti: 3),
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -108,9 +108,9 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
           CoffeeSizeModel(
-              coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1),
+              coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2),
           CoffeeSizeModel(
-              coffeeSize: "L", coffeeChecked: false, coffeeMulti: 1),
+              coffeeSize: "L", coffeeChecked: false, coffeeMulti: 3),
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -126,7 +126,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 100,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2)
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -142,7 +142,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 50,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2)
         ]));
 
     coffeeDetailsList.add(CoffeeDetails(
@@ -158,7 +158,7 @@ class CoffeeProvider extends ChangeNotifier {
         coffeeNewPrice: 80,
         coffeeSizeModel: [
           CoffeeSizeModel(coffeeSize: "S", coffeeChecked: true, coffeeMulti: 1),
-          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 1)
+          CoffeeSizeModel(coffeeSize: "M", coffeeChecked: false, coffeeMulti: 2)
         ]));
 
     notifyListeners();

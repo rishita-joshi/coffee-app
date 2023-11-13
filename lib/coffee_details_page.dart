@@ -45,7 +45,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                     providerObj.coffeeDetailsList[widget.Index].coffeeImage,
               ),
               Positioned(
-                top: 250,
+                top: 260,
                 child: SingleChildScrollView(
                   child: Container(
                     height: MediaQuery.of(context).size.height,
@@ -70,23 +70,13 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                " "
-                                '\$'
-                                " ${providerObj.coffeeDetailsList[widget.Index].coffeeNewPrice > 0 ? providerObj.coffeeDetailsList[widget.Index].coffeeNewPrice.toString() : providerObj.coffeeDetailsList[widget.Index].coffeePrice.toString()}",
-                                style: TextStyle(
-                                    fontSize: 30, color: Colors.black),
-                              ),
-                            ],
-                          ),
+
+                          //  Text("Coffee Price"),
+                          Text(
+                              " "
+                              '\$'
+                              " ${providerObj.coffeeDetailsList[widget.Index].coffeeNewPrice.toString()}",
+                              style: ThemeClass.titleTextStyle),
                           SizedBox(
                             height: 10,
                           ),
