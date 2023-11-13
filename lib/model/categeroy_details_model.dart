@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:coffee_app/model/coffee_size_model.dart';
+
 CoffeeDetails coffeeDetailsFromJson(String str) =>
     CoffeeDetails.fromJson(json.decode(str));
 
@@ -11,7 +13,6 @@ String coffeeDetailsToJson(CoffeeDetails data) => json.encode(data.toJson());
 
 class CoffeeDetails {
   String coffeeName;
-  String coffeeTitle;
   String coffeeSubtitle;
   bool isFav;
   int coffeeStock;
@@ -19,17 +20,18 @@ class CoffeeDetails {
   String coffeeMainCategeroy;
   String coffeeImage;
   int coffeeNewPrice;
+  List<CoffeeSizeModel> coffeeSizeModel;
 
   CoffeeDetails(
       {required this.coffeeName,
-      required this.coffeeTitle,
       required this.coffeeSubtitle,
       required this.isFav,
       required this.coffeeStock,
       required this.coffeePrice,
       required this.coffeeMainCategeroy,
       required this.coffeeImage,
-      required this.coffeeNewPrice});
+      required this.coffeeNewPrice,
+      required this.coffeeSizeModel});
 
   CoffeeDetails copyWith({
     String? coffeeName,
@@ -40,10 +42,11 @@ class CoffeeDetails {
     int? coffeePrice,
     String? coffeeMainCategeroy,
     String? coffeeImage,
+    List<CoffeeSizeModel>? coffeeSizeModel,
   }) =>
       CoffeeDetails(
+          coffeeSizeModel: coffeeSizeModel ?? this.coffeeSizeModel,
           coffeeName: coffeeName ?? this.coffeeName,
-          coffeeTitle: coffeeTitle ?? this.coffeeTitle,
           coffeeSubtitle: coffeeSubtitle ?? this.coffeeSubtitle,
           isFav: isFav ?? this.isFav,
           coffeeStock: coffeeStock ?? this.coffeeStock,
@@ -53,26 +56,25 @@ class CoffeeDetails {
           coffeeNewPrice: coffeeNewPrice);
 
   factory CoffeeDetails.fromJson(Map<String, dynamic> json) => CoffeeDetails(
-        coffeeName: json["coffee_name"],
-        coffeeTitle: json["coffee_title"],
-        coffeeSubtitle: json["coffee_subtitle"],
-        isFav: json["isFav"],
-        coffeeStock: json["coffee_stock"],
-        coffeePrice: json["coffee_price"],
-        coffeeMainCategeroy: json["coffee_mainCategeroy"],
-        coffeeImage: json["coffee_image"],
-        coffeeNewPrice: json["coffee_newPrice"],
-      );
+      coffeeName: json["coffee_name"],
+      coffeeSubtitle: json["coffee_subtitle"],
+      isFav: json["isFav"],
+      coffeeStock: json["coffee_stock"],
+      coffeePrice: json["coffee_price"],
+      coffeeMainCategeroy: json["coffee_mainCategeroy"],
+      coffeeImage: json["coffee_image"],
+      coffeeNewPrice: json["coffee_newPrice"],
+      coffeeSizeModel: json["coffeeSizeModel"]);
 
   Map<String, dynamic> toJson() => {
         "coffee_name": coffeeName,
-        "coffee_title": coffeeTitle,
         "coffee_subtitle": coffeeSubtitle,
         "isFav": isFav,
         "coffee_stock": coffeeStock,
         "coffee_price": coffeePrice,
         "coffee_mainCategeroy": coffeeMainCategeroy,
         "coffee_image": coffeeImage,
-        "coffee_newPrice": coffeeNewPrice
+        "coffee_newPrice": coffeeNewPrice,
+        "coffeeSizeModel": coffeeSizeModel
       };
 }

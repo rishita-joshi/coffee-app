@@ -1,6 +1,7 @@
-import 'package:coffee_app/cart_page.dart';
+import 'package:coffee_app/add_to_cart_page.dart';
 import 'package:coffee_app/components/horizational_list.dart';
 import 'package:coffee_app/provider/coffee_provider.dart';
+import 'package:coffee_app/ui/theme_class.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,167 +18,229 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
   Widget build(BuildContext context) {
     return Consumer<CoffeeProvider>(builder: (context, providerObj, child) {
       return Scaffold(
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 10, left: 30, right: 10),
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: ThemeClass.brownColor),
+              onPressed: () {
+                providerObj.addToCart(widget.Index);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddToCartPage()));
+              },
+              child: Text(
+                "Buy Now",
+                style: TextStyle(color: ThemeClass.whiteColor),
+              )),
+        ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
-          child: Stack(children: [
-            CachedNetworkImage(
-              fit: BoxFit.fill,
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width,
-              imageUrl: providerObj.coffeeDetailsList[widget.Index].coffeeImage,
-            ),
-            Positioned(
-              top: 350,
-              child: Container(
-                height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              CachedNetworkImage(
+                fit: BoxFit.fill,
+                height: MediaQuery.of(context).size.height * 0.4,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15))),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        providerObj.coffeeDetailsList[widget.Index].coffeeName,
-                        style: TextStyle(fontSize: 30, color: Colors.black),
-                      ),
-                      Text(providerObj
-                          .coffeeDetailsList[widget.Index].coffeeSubtitle),
-                      Text(
-                        "Size",
-                        style: TextStyle(fontSize: 30, color: Colors.black),
-                      ),
-                      HorizontalList(
-                          itemCount: providerObj.coffeeSize.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                providerObj.changeCoffeeSize(
-                                    index, widget.Index);
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: providerObj
-                                            .coffeeSize[index].coffeeChecked
-                                        ? Colors.green
-                                        : Colors.grey),
-                                child: Center(
-                                  child: Text(
-                                    providerObj.coffeeSize[index].coffeeSize,
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                      Text(
-                        providerObj.coffeeDetailsList[widget.Index]
-                                    .coffeeNewPrice >
-                                0
-                            ? providerObj
-                                .coffeeDetailsList[widget.Index].coffeeNewPrice
-                                .toString()
-                            : providerObj
-                                .coffeeDetailsList[widget.Index].coffeePrice
-                                .toString(),
-                        style: TextStyle(fontSize: 30, color: Colors.black),
-                      ),
-                      Row(
+                imageUrl:
+                    providerObj.coffeeDetailsList[widget.Index].coffeeImage,
+              ),
+              Positioned(
+                top: 250,
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          providerObj.coffeeDetailsList[widget.Index]
-                                      .coffeeStock ==
-                                  0
-                              ? Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      providerObj.addStock(widget.Index);
-                                    },
-                                    icon: Icon(
-                                      Icons.add,
-                                      color: Colors.black,
+                          Text(
+                            providerObj
+                                .coffeeDetailsList[widget.Index].coffeeName,
+                            style: TextStyle(fontSize: 30, color: Colors.black),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                " "
+                                '\$'
+                                " ${providerObj.coffeeDetailsList[widget.Index].coffeeNewPrice > 0 ? providerObj.coffeeDetailsList[widget.Index].coffeeNewPrice.toString() : providerObj.coffeeDetailsList[widget.Index].coffeePrice.toString()}",
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("Discription", style: ThemeClass.titleTextStyle),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(providerObj
+                              .coffeeDetailsList[widget.Index].coffeeSubtitle),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("Size Of Coffee",
+                              style: ThemeClass.titleTextStyle),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          HorizontalList(
+                              itemCount: providerObj
+                                  .coffeeDetailsList[widget.Index]
+                                  .coffeeSizeModel
+                                  .length,
+                              itemBuilder: (context, sizeIndex) {
+                                return InkWell(
+                                  onTap: () {
+                                    providerObj.changeCoffeeSize(
+                                        sizeIndex, widget.Index);
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: providerObj
+                                            .coffeeDetailsList[widget.Index]
+                                            .coffeeSizeModel[sizeIndex]
+                                            .coffeeChecked
+                                        ? BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: ThemeClass.brownColor)
+                                        : BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                width: 2.0,
+                                                color: ThemeClass.brownColor),
+                                          ),
+                                    child: Center(
+                                      child: Text(
+                                        providerObj
+                                            .coffeeDetailsList[widget.Index]
+                                            .coffeeSizeModel[sizeIndex]
+                                            .coffeeSize,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: providerObj
+                                                    .coffeeDetailsList[
+                                                        widget.Index]
+                                                    .coffeeSizeModel[sizeIndex]
+                                                    .coffeeChecked
+                                                ? ThemeClass.whiteColor
+                                                : ThemeClass.blackColor),
+                                      ),
                                     ),
-                                  ))
-                              : Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.grey),
-                                      child: IconButton(
-                                          onPressed: () {
-                                            providerObj.addStock(widget.Index);
-                                          },
-                                          icon: Icon(Icons.add)),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      providerObj
-                                          .coffeeDetailsList[widget.Index]
-                                          .coffeeStock
-                                          .toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.grey),
-                                      child: IconButton(
-                                          onPressed: () {
-                                            providerObj
-                                                .minusStock(widget.Index);
-                                          },
-                                          icon: Icon(Icons.remove)),
-                                    ),
-                                  ],
-                                ),
-                          ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AddToCartPage(
-                                              providerObj: providerObj,
-                                            )));
-                              },
-                              child: Text("Buy Now"))
+                                  ),
+                                );
+                              }),
+                          SizedBox(
+                            height: 10,
+                          ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            )
-          ]),
+            ],
+          ),
         ),
       );
     });
   }
 }
+
+
+
+//   providerObj.coffeeDetailsList[widget.Index]
+//                                         .coffeeStock ==
+//                                     0
+//                                 ? Container(
+//                                     width: 35,
+//                                     height: 35,
+//                                     decoration: BoxDecoration(
+//                                       shape: BoxShape.circle,
+//                                       color: ThemeClass.brownColor,
+//                                       border: Border.all(
+//                                           width: 2.0,
+//                                           color: ThemeClass.brownColor),
+//                                     ),
+//                                     child: Center(
+//                                       child: IconButton(
+//                                         onPressed: () {
+//                                           providerObj.addStock(widget.Index);
+//                                         },
+//                                         iconSize: 15,
+//                                         icon: Icon(
+//                                           Icons.add,
+//                                           color: Colors.white,
+//                                         ),
+//                                       ),
+//                                     ))
+//                                 : Row(
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.start,
+//                                     mainAxisAlignment: MainAxisAlignment.start,
+//                                     mainAxisSize: MainAxisSize.min,
+//                                     children: [
+                                   //    Container(
+                                   //      width: 35,
+                                   //      height: 35,
+                                   //      decoration: BoxDecoration(
+                                   //        border: Border.all(
+                                   //            width: 2.0,
+                                   //            color: ThemeClass.brownColor),
+                                   //        shape: BoxShape.circle,
+                                   //      ),
+                                   //      child: IconButton(
+                                   //          iconSize: 15,
+                                   //          onPressed: () {
+                                   //            providerObj
+                                   //                .addStock(widget.Index);
+                                   //          },
+                                   //          icon: Icon(Icons.add)),
+                                   //    ),
+
+                              //       Text(
+                              //   providerObj
+                              //       .coffeeDetailsList[widget.Index].coffeeStock
+                              //       .toString(),
+                              //   style: TextStyle(),
+                              // ),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
+                              // Container(
+                              //   width: 35,
+                              //   height: 35,
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(
+                              //         width: 2.0, color: ThemeClass.brownColor),
+                              //     shape: BoxShape.circle,
+                              //   ),
+                              //   child: IconButton(
+                              //       iconSize: 15,
+                              //       onPressed: () {
+                              //         providerObj.minusStock(widget.Index);
+                              //       },
+                              //       icon: Icon(Icons.remove)),
+                              // ),
+                          
